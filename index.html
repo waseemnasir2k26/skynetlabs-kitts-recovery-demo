@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Kitts Recovery Services — You don't have to carry the weight alone</title>
+<meta name="description" content="Professional support, rooted in real-life experience. Individual & group counseling, peer support services, mental health & substance use recovery." />
+<link rel="canonical" href="https://skynetlabs-kitts-recovery-demo.vercel.app/" />
+
+<meta property="og:title" content="Kitts Recovery Services — Pacific Northwest peer support & recovery" />
+<meta property="og:description" content="You don't have to carry the weight alone. Individual & group counseling rooted in lived experience." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://skynetlabs-kitts-recovery-demo.vercel.app/" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        v1: { ink:'#0E2A33', moss:'#1F3D2B', lichen:'#7A8B6E', bone:'#E8E2D3', brass:'#C2A878', cream:'#F2EDE3' },
+        v2: { black:'#0A1F1C', ever:'#13322B', fern:'#2C5448', mist:'#9DB0A4', paper:'#F2EDE3' },
+        v3: { slate:'#1B2A33', stone:'#3F5A5C', fog:'#B8C4BD', linen:'#FAF7F1', ink:'#0F1A20' },
+        v4: { mossd:'#1E3A2F', sage:'#5B7553', drift:'#A8907A', ochre:'#D8B26A', cream:'#F5EFE2' },
+        v5: { navy:'#091A2C', teal:'#0E4F4A', kelp:'#1F6F65', sand:'#C8B89F', salt:'#EAE5D7' },
+      },
+      fontFamily: {
+        fraunces: ['Fraunces','serif'],
+        cormorant: ['"Cormorant Garamond"','serif'],
+        ebgar: ['"EB Garamond"','serif'],
+        inter: ['Inter','sans-serif'],
+        intertight: ['"Inter Tight"','sans-serif'],
+        dmsans: ['"DM Sans"','sans-serif'],
+        mono: ['"JetBrains Mono"','monospace'],
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  html { scroll-behavior:smooth; }
+  body { background:#0a0a0a; }
+  .variant { display:none; }
+  body.show-v1 .v1 { display:block; }
+  body.show-v2 .v2 { display:block; }
+  body.show-v3 .v3 { display:block; }
+  body.show-v4 .v4 { display:block; }
+  body.show-v5 .v5 { display:block; }
+
+  /* film grain */
+  .grain::before {
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='5'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+    opacity:0.05; mix-blend-mode:overlay;
+  }
+  .grain-strong::before { opacity:0.12; }
+
+  @keyframes kenburns { 0%{transform:scale(1.05)} 100%{transform:scale(1.18)} }
+  .kb { animation:kenburns 28s ease-in-out infinite alternate; }
+
+  @keyframes fadeup { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+  .fadeup { animation:fadeup .9s ease-out both; }
+
+  @keyframes drift { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .marquee { animation:drift 50s linear infinite; }
+
+  /* switcher */
+  .switcher { position:fixed; top:18px; right:18px; z-index:99; display:flex; gap:4px; padding:5px; background:rgba(14,20,24,.82); backdrop-filter:blur(14px); border-radius:999px; border:1px solid rgba(255,255,255,.10); }
+  .switcher button { font:500 11px/1 'Inter',sans-serif; letter-spacing:.08em; text-transform:uppercase; padding:9px 13px; border-radius:999px; color:#cfd8d3; cursor:pointer; transition:all .25s; border:0; background:transparent; }
+  .switcher button.active { background:#fff; color:#0a0a0a; }
+  @media (max-width:640px) { .switcher { top:auto; bottom:14px; right:14px; left:14px; justify-content:space-between; } .switcher button { padding:9px 8px; font-size:10px; } }
+
+  .demo-badge { position:fixed; bottom:14px; left:14px; z-index:99; font:500 11px 'Inter',sans-serif; color:#fff; background:rgba(0,0,0,.62); backdrop-filter:blur(10px); padding:7px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); text-decoration:none; }
+  .demo-badge:hover { background:rgba(0,0,0,.85); }
+  @media (max-width:640px) { .demo-badge { display:none; } }
+
+  details > summary { list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker { display:none; }
+  details[open] .chev { transform:rotate(45deg); }
+  .chev { transition:transform .25s; display:inline-block; }
+
+  /* drop cap */
+  .dropcap-1::first-letter { float:left; font-family:'Fraunces',serif; font-size:5em; line-height:.85; padding:.04em .12em 0 0; color:#C2A878; }
+  .dropcap-4::first-letter { float:left; font-family:'EB Garamond',serif; font-style:italic; font-size:5.2em; line-height:.82; padding:.05em .10em 0 0; color:#D8B26A; }
+
+  /* fog overlay */
+  .fog { position:absolute; inset:0; background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.16), transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(255,255,255,.08), transparent 60%); pointer-events:none; }
+
+  /* tide rule */
+  .tide { background:linear-gradient(90deg, transparent, currentColor 30%, currentColor 70%, transparent); height:1px; opacity:.4; }
+
+  /* v5 brutalist hairline */
+  .hair { border-top:1px solid currentColor; opacity:.35; }
+
+  /* compass mark */
+  .compass::before { content:"✦"; display:inline-block; transform:translateY(-2px); margin-right:.4em; opacity:.7; }
+
+  /* image mask */
+  .vignette { box-shadow: inset 0 0 140px 30px rgba(8,16,20,0.5); }
+
+  .ringbtn { transition:all .25s; }
+  .ringbtn:hover { transform:translateY(-1px); box-shadow:0 8px 30px -8px currentColor; }
+
+  /* v3 fog scroll */
+  @keyframes fog-shift { 0%{opacity:.3} 50%{opacity:.55} 100%{opacity:.3} }
+  .fog-anim { animation:fog-shift 9s ease-in-out infinite; }
+</style>
+</head>
+<body class="show-v1 grain antialiased">
+
+<!-- ===== SWITCHER ===== -->
+<div class="switcher" role="tablist" aria-label="Variant switcher">
+  <button data-variant="v1" class="active">V1 · Tideline</button>
+  <button data-variant="v2">V2 · Cathedral</button>
+  <button data-variant="v3">V3 · Misty</button>
+  <button data-variant="v4">V4 · Mossbound</button>
+  <button data-variant="v5">V5 · Northern Tide</button>
+</div>
+<a class="demo-badge" href="https://www.skynetjoe.com" target="_blank" rel="noopener">Demo · SkynetLabs</a>
+
+<!-- ============================================================ -->
+<!-- V1 · TIDELINE EDITORIAL                                       -->
+<!-- ============================================================ -->
+<section class="variant v1 font-inter text-v1-ink bg-v1-cream">
+
+  <!-- nav -->
+  <header class="absolute top-0 inset-x-0 z-30">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+      <a href="#" class="font-fraunces text-xl tracking-tight text-v1-bone">Kitts Recovery</a>
+      <nav class="hidden md:flex items-center gap-8 text-[12px] uppercase tracking-[0.18em] text-v1-bone/85">
+        <a href="#v1-about">About Jessie</a>
+        <a href="#v1-services">Services</a>
+        <a href="#v1-approach">Approach</a>
+        <a href="#v1-book" class="px-4 py-2 border border-v1-bone/50 rounded-full hover:bg-v1-bone hover:text-v1-ink transition">Book session</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <div class="relative h-[100vh] min-h-[680px] overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=2000&q=80" alt="Misty Pacific Northwest forest" class="absolute inset-0 w-full h-full object-cover kb" />
+    <div class="absolute inset-0 bg-gradient-to-b from-v1-ink/70 via-v1-ink/40 to-v1-ink/85"></div>
+    <div class="fog"></div>
+    <div class="relative z-10 h-full max-w-6xl mx-auto px-6 flex flex-col justify-end pb-28">
+      <div class="text-v1-brass text-[11px] tracking-[0.4em] uppercase mb-6 fadeup">A peer-led recovery practice · Pacific Northwest</div>
+      <h1 class="font-fraunces text-v1-cream text-[clamp(2.6rem,7vw,6rem)] leading-[1.02] tracking-[-0.02em] max-w-4xl fadeup" style="animation-delay:.1s">You don't have to carry <em class="italic text-v1-brass font-light">the weight</em> alone.</h1>
+      <p class="mt-7 max-w-xl text-v1-cream/85 text-lg leading-relaxed font-cormorant text-[1.35rem] fadeup" style="animation-delay:.25s">Professional support, rooted in real-life experience. I bridge the gap between clinical expertise and genuine understanding to help you navigate life's toughest transitions.</p>
+      <div class="mt-10 flex flex-wrap gap-4 fadeup" style="animation-delay:.4s">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn px-7 py-4 bg-v1-brass text-v1-ink font-medium tracking-wide rounded-full text-sm uppercase">Book a $20 discovery call</a>
+        <a href="#v1-services" class="ringbtn px-7 py-4 border border-v1-cream/40 text-v1-cream rounded-full text-sm uppercase tracking-wide">See services</a>
+      </div>
+    </div>
+    <div class="absolute bottom-6 inset-x-0 text-center text-v1-cream/60 text-[11px] tracking-[0.3em] uppercase">Scroll · Resilience is a journey</div>
+  </div>
+
+  <!-- pull quote band -->
+  <div class="bg-v1-ink text-v1-bone py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="text-v1-brass text-[10px] tracking-[0.4em] uppercase mb-5 compass">From the founder</div>
+      <p class="font-fraunces italic text-[clamp(1.6rem,3.4vw,2.8rem)] leading-[1.18]">"Finding empathy in shared struggle is the first step toward healing. I've been where you are — and I bring both the credentials and the lived experience to walk it with you."</p>
+      <div class="tide my-10 text-v1-brass mx-auto w-40"></div>
+      <div class="text-sm tracking-[0.2em] uppercase text-v1-bone/70">— Majesta (Jessie) Kitts, EdD, MPH, CPRS</div>
+    </div>
+  </div>
+
+  <!-- about -->
+  <div id="v1-about" class="py-28">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-5">
+        <div class="aspect-[4/5] overflow-hidden vignette">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1400&q=80" alt="Pacific Northwest landscape" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-3 text-[11px] tracking-[0.3em] uppercase text-v1-ink/60">Pacific Northwest · United States</div>
+      </div>
+      <div class="md:col-span-7">
+        <div class="text-v1-moss text-[11px] tracking-[0.4em] uppercase mb-4 compass">About Jessie</div>
+        <h2 class="font-fraunces text-[clamp(2rem,4.4vw,3.6rem)] leading-[1.05] tracking-[-0.02em] mb-7">Credentialed clinician.<br/><em class="italic text-v1-moss font-light">Peer who's been there.</em></h2>
+        <p class="dropcap-1 font-ebgar text-[1.18rem] leading-[1.65] text-v1-ink/85 mb-5">Majesta — known to most as Jessie — holds an EdD, an MPH, and is a Certified Peer Recovery Specialist. She has navigated her own complex recovery while keeping a demanding career intact, and brings both sides of that table into every session.</p>
+        <p class="text-v1-ink/80 leading-relaxed mb-8">Her practice combines clinical training with the texture of lived experience. She functions as both formal guidance provider and as an experienced ally — depending on what the moment calls for.</p>
+        <div class="grid grid-cols-3 gap-6 pt-6 border-t border-v1-ink/15">
+          <div><div class="font-fraunces text-3xl text-v1-moss">EdD</div><div class="text-xs tracking-[0.2em] uppercase text-v1-ink/55 mt-1">Doctorate</div></div>
+          <div><div class="font-fraunces text-3xl text-v1-moss">MPH</div><div class="text-xs tracking-[0.2em] uppercase text-v1-ink/55 mt-1">Public Health</div></div>
+          <div><div class="font-fraunces text-3xl text-v1-moss">CPRS</div><div class="text-xs tracking-[0.2em] uppercase text-v1-ink/55 mt-1">Peer Specialist</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- services -->
+  <div id="v1-services" class="bg-v1-bone py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-14">
+        <div>
+          <div class="text-v1-moss text-[11px] tracking-[0.4em] uppercase mb-3 compass">Services</div>
+          <h2 class="font-fraunces text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.05] tracking-[-0.02em]">Four ways<br/><em class="italic text-v1-moss font-light">to begin.</em></h2>
+        </div>
+        <p class="max-w-md text-v1-ink/75 leading-relaxed">Each session is held over secure video. Sliding rates and group support exist so cost isn't the reason you wait another month.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-px bg-v1-ink/15">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="block bg-v1-cream p-10 hover:bg-v1-bone transition">
+          <div class="flex items-baseline justify-between mb-5"><div class="font-fraunces text-2xl">Discovery Session</div><div class="text-v1-brass font-fraunces text-3xl">$20</div></div>
+          <div class="text-[11px] tracking-[0.3em] uppercase text-v1-ink/60 mb-4">30 min · video</div>
+          <p class="text-v1-ink/80 leading-relaxed mb-6">A first conversation to explore what you're carrying, talk goals, and see if we're the right fit. No pressure, no script.</p>
+          <div class="text-v1-moss text-sm tracking-[0.18em] uppercase">Book →</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="block bg-v1-cream p-10 hover:bg-v1-bone transition">
+          <div class="flex items-baseline justify-between mb-5"><div class="font-fraunces text-2xl">Standard Session</div><div class="text-v1-brass font-fraunces text-3xl">$60</div></div>
+          <div class="text-[11px] tracking-[0.3em] uppercase text-v1-ink/60 mb-4">60 min · video</div>
+          <p class="text-v1-ink/80 leading-relaxed mb-6">One-on-one tailored support that meets you where you are — recovery, mental health, transitions, the whole knot.</p>
+          <div class="text-v1-moss text-sm tracking-[0.18em] uppercase">Book →</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="block bg-v1-cream p-10 hover:bg-v1-bone transition">
+          <div class="flex items-baseline justify-between mb-5"><div class="font-fraunces text-2xl">Flex Rate Session</div><div class="text-v1-brass font-fraunces text-3xl">$45</div></div>
+          <div class="text-[11px] tracking-[0.3em] uppercase text-v1-ink/60 mb-4">60 min · community on-call hours</div>
+          <p class="text-v1-ink/80 leading-relaxed mb-6">Same care, lower rate, during designated community hours. So showing up doesn't mean choosing between rent and recovery.</p>
+          <div class="text-v1-moss text-sm tracking-[0.18em] uppercase">Book →</div>
+        </a>
+        <a href="#v1-book" class="block bg-v1-cream p-10 hover:bg-v1-bone transition">
+          <div class="flex items-baseline justify-between mb-5"><div class="font-fraunces text-2xl">Support Groups</div><div class="text-v1-brass font-fraunces text-3xl">$10</div></div>
+          <div class="text-[11px] tracking-[0.3em] uppercase text-v1-ink/60 mb-4">60 min · facilitated group</div>
+          <p class="text-v1-ink/80 leading-relaxed mb-6">Facilitated community connection. Shared wisdom from others who've walked similar ground. Held in small cohorts.</p>
+          <div class="text-v1-moss text-sm tracking-[0.18em] uppercase">Express interest →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- approach -->
+  <div id="v1-approach" class="py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-v1-moss text-[11px] tracking-[0.4em] uppercase mb-4 compass">Approach</div>
+      <h2 class="font-fraunces text-[clamp(2rem,4.2vw,3.4rem)] leading-[1.05] tracking-[-0.02em] mb-12">Adaptable. Honest. <em class="italic text-v1-moss font-light">Yours to shape.</em></h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div><div class="font-fraunces text-2xl mb-3 text-v1-moss">Met where you are</div><p class="text-v1-ink/80 leading-relaxed">No fixed program. Sessions flex between formal guidance and peer-to-peer when that's what the moment calls for.</p></div>
+        <div><div class="font-fraunces text-2xl mb-3 text-v1-moss">Both/and</div><p class="text-v1-ink/80 leading-relaxed">Clinical credentials and lived recovery — together. Not one or the other. The whole picture.</p></div>
+        <div><div class="font-fraunces text-2xl mb-3 text-v1-moss">No story too heavy</div><p class="text-v1-ink/80 leading-relaxed">Substance use, mental health, life-quake transitions — bring the messy version. That's the version that gets healed.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div id="v1-book" class="relative py-32 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=2000&q=80" alt="Foggy Pacific coast" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-v1-ink/82"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+      <div class="text-v1-brass text-[11px] tracking-[0.4em] uppercase mb-5 compass">Begin</div>
+      <h2 class="font-fraunces text-v1-cream text-[clamp(2.2rem,5vw,4rem)] leading-[1.05] tracking-[-0.02em] mb-7">Resilience is a journey.<br/><em class="italic text-v1-brass font-light">Let's start yours.</em></h2>
+      <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="inline-block ringbtn px-9 py-5 bg-v1-brass text-v1-ink font-medium tracking-[0.2em] rounded-full text-sm uppercase">Book a $20 discovery call</a>
+      <p class="mt-7 text-v1-cream/65 text-sm">30-minute video · zero pressure · same-week openings</p>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="bg-v1-ink text-v1-bone/80 py-14">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-sm">
+      <div>
+        <div class="font-fraunces text-v1-cream text-xl mb-3">Kitts Recovery Services</div>
+        <p class="leading-relaxed text-v1-bone/70">Individual & group counseling · peer support · mental health & substance use recovery. Pacific Northwest, US.</p>
+      </div>
+      <div>
+        <div class="text-[11px] tracking-[0.3em] uppercase text-v1-brass mb-3">Bookings</div>
+        <ul class="space-y-2">
+          <li><a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v1-cream">Discovery · $20</a></li>
+          <li><a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v1-cream">Standard · $60</a></li>
+          <li><a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v1-cream">Flex Rate · $45</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-[11px] tracking-[0.3em] uppercase text-v1-brass mb-3">Notice</div>
+        <p class="text-v1-bone/70 leading-relaxed">If you are in immediate crisis, please call or text <strong class="text-v1-cream">988</strong> (US Suicide & Crisis Lifeline). Kitts Recovery is non-emergency support.</p>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-v1-bone/15 text-xs text-v1-bone/55 flex flex-wrap justify-between gap-3">
+      <div>© 2026 Kitts Recovery Services · kittsrecoveryservices.com</div>
+      <div>Demo build · designed by SkynetLabs</div>
+    </div>
+  </footer>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- V2 · FOREST CATHEDRAL CINEMATIC                               -->
+<!-- ============================================================ -->
+<section class="variant v2 font-intertight text-v2-paper bg-v2-black">
+
+  <!-- nav -->
+  <header class="absolute top-0 inset-x-0 z-30">
+    <div class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+      <a href="#" class="font-cormorant text-2xl tracking-tight text-v2-paper">Kitts<span class="text-v2-mist"> · </span>Recovery</a>
+      <nav class="hidden md:flex items-center gap-10 text-[12px] tracking-[0.22em] uppercase text-v2-paper/85">
+        <a href="#v2-about">Practitioner</a>
+        <a href="#v2-services">Services</a>
+        <a href="#v2-philosophy">Philosophy</a>
+        <a href="#v2-book" class="text-v2-paper">Begin →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero full-bleed -->
+  <div class="relative h-[110vh] min-h-[760px] overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2400&q=85" alt="Cathedral of evergreens, mist" class="absolute inset-0 w-full h-full object-cover kb" />
+    <div class="absolute inset-0 bg-gradient-to-b from-v2-black/55 via-v2-black/25 to-v2-black/95"></div>
+    <div class="fog fog-anim"></div>
+    <div class="relative z-10 h-full max-w-7xl mx-auto px-8 flex flex-col justify-center">
+      <div class="max-w-4xl">
+        <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-8 fadeup">PNW · Peer Support · Recovery</div>
+        <h1 class="font-cormorant text-[clamp(3rem,9vw,8rem)] leading-[0.96] tracking-[-0.025em] fadeup" style="animation-delay:.1s">
+          You don't have<br/>to carry the<br/><em class="italic text-v2-mist font-light">weight</em> alone.
+        </h1>
+        <p class="mt-10 max-w-xl text-v2-paper/85 text-lg leading-[1.65] fadeup" style="animation-delay:.25s">A practice for the in-between — when clinical care alone feels too cold, and a friend who hasn't been there feels too far. Both, held in one hour.</p>
+        <div class="mt-12 flex flex-wrap items-center gap-6 fadeup" style="animation-delay:.4s">
+          <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn px-9 py-4 bg-v2-paper text-v2-black font-medium tracking-[0.2em] uppercase text-sm">Discovery · 30 min · $20</a>
+          <a href="#v2-services" class="text-v2-paper/85 text-sm tracking-[0.2em] uppercase border-b border-v2-paper/30 pb-1">All four sessions</a>
+        </div>
+      </div>
+    </div>
+    <!-- tide line -->
+    <div class="absolute bottom-10 inset-x-0 max-w-7xl mx-auto px-8 z-10 flex items-center justify-between text-v2-mist text-[10px] tracking-[0.4em] uppercase">
+      <span>EdD · MPH · CPRS</span>
+      <span>Held over secure video</span>
+      <span>Same-week openings</span>
+    </div>
+  </div>
+
+  <!-- whisper section -->
+  <div class="bg-v2-ever py-28 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15"><img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1800&q=80" class="w-full h-full object-cover" alt="moss"/></div>
+    <div class="relative max-w-4xl mx-auto px-8 text-center">
+      <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-6">A peer-led recovery practice</div>
+      <p class="font-cormorant italic text-[clamp(1.7rem,3.6vw,3rem)] leading-[1.18] text-v2-paper">"Finding empathy in shared struggle is the first step toward healing. I bridge the gap between clinical expertise and genuine understanding."</p>
+      <div class="mt-10 text-[11px] tracking-[0.35em] uppercase text-v2-mist">— Majesta (Jessie) Kitts · Founder</div>
+    </div>
+  </div>
+
+  <!-- about -->
+  <div id="v2-about" class="py-32">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-14 items-center">
+      <div class="md:col-span-6">
+        <div class="aspect-[4/5] overflow-hidden vignette relative">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85" alt="Misty mountains" class="w-full h-full object-cover kb" />
+          <div class="absolute bottom-5 left-5 text-v2-paper/90 text-[10px] tracking-[0.4em] uppercase">PNW · 2026</div>
+        </div>
+      </div>
+      <div class="md:col-span-6">
+        <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-5">The practitioner</div>
+        <h2 class="font-cormorant text-[clamp(2.2rem,4.6vw,4rem)] leading-[1.04] tracking-[-0.02em] mb-8">Dr. Majesta <em class="italic text-v2-mist">(Jessie)</em> Kitts</h2>
+        <p class="text-v2-paper/85 leading-[1.75] text-[1.05rem] mb-5">Three credentials. One reason. Jessie carries an EdD, an MPH, and a Certified Peer Recovery Specialist designation — assembled in the order most people don't: she lived the recovery first, then went and got the letters.</p>
+        <p class="text-v2-paper/75 leading-[1.75] mb-10">"I've been where you are" isn't marketing copy here. It's the foundation.</p>
+        <div class="grid grid-cols-3 gap-6 pt-8 border-t border-v2-paper/15 text-center">
+          <div><div class="font-cormorant text-3xl text-v2-paper">EdD</div><div class="text-[10px] tracking-[0.3em] uppercase text-v2-mist mt-1">Education</div></div>
+          <div><div class="font-cormorant text-3xl text-v2-paper">MPH</div><div class="text-[10px] tracking-[0.3em] uppercase text-v2-mist mt-1">Public Health</div></div>
+          <div><div class="font-cormorant text-3xl text-v2-paper">CPRS</div><div class="text-[10px] tracking-[0.3em] uppercase text-v2-mist mt-1">Peer Recovery</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- services -->
+  <div id="v2-services" class="bg-v2-fern/20 py-28 border-y border-v2-paper/10">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid md:grid-cols-12 gap-10 mb-16">
+        <div class="md:col-span-5">
+          <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-4">Sessions</div>
+          <h2 class="font-cormorant text-[clamp(2rem,4.4vw,3.6rem)] leading-[1.04]">Four doors.<br/><em class="italic text-v2-mist">One welcome.</em></h2>
+        </div>
+        <div class="md:col-span-7 md:col-start-7 self-end text-v2-paper/75 leading-[1.75]">All sessions are held over secure video, on Pacific time. Cancel up to 24 hours ahead, no questions asked. Sliding rates so the cost of starting isn't the thing that stops you.</div>
+      </div>
+      <div class="space-y-px">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid md:grid-cols-12 gap-6 py-7 px-2 hover:bg-v2-paper/5 transition border-t border-v2-paper/15">
+          <div class="md:col-span-1 font-cormorant text-3xl text-v2-mist">01</div>
+          <div class="md:col-span-3 font-cormorant text-2xl">Discovery</div>
+          <div class="md:col-span-2 text-v2-mist text-sm tracking-wider">30 min · video</div>
+          <div class="md:col-span-4 text-v2-paper/75 text-sm leading-relaxed">A first conversation. We meet, talk goals, see if we're the right fit. No pressure.</div>
+          <div class="md:col-span-2 text-right font-cormorant text-3xl text-v2-paper">$20</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid md:grid-cols-12 gap-6 py-7 px-2 hover:bg-v2-paper/5 transition border-t border-v2-paper/15">
+          <div class="md:col-span-1 font-cormorant text-3xl text-v2-mist">02</div>
+          <div class="md:col-span-3 font-cormorant text-2xl">Standard</div>
+          <div class="md:col-span-2 text-v2-mist text-sm tracking-wider">60 min · video</div>
+          <div class="md:col-span-4 text-v2-paper/75 text-sm leading-relaxed">One-on-one, tailored to your moment. Recovery, mental health, transitions — bring it.</div>
+          <div class="md:col-span-2 text-right font-cormorant text-3xl text-v2-paper">$60</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid md:grid-cols-12 gap-6 py-7 px-2 hover:bg-v2-paper/5 transition border-t border-v2-paper/15">
+          <div class="md:col-span-1 font-cormorant text-3xl text-v2-mist">03</div>
+          <div class="md:col-span-3 font-cormorant text-2xl">Flex Rate</div>
+          <div class="md:col-span-2 text-v2-mist text-sm tracking-wider">60 min · on-call hours</div>
+          <div class="md:col-span-4 text-v2-paper/75 text-sm leading-relaxed">Same care during community hours, lower rate. So cost isn't the reason you wait.</div>
+          <div class="md:col-span-2 text-right font-cormorant text-3xl text-v2-paper">$45</div>
+        </a>
+        <a href="#v2-book" class="grid md:grid-cols-12 gap-6 py-7 px-2 hover:bg-v2-paper/5 transition border-t border-b border-v2-paper/15">
+          <div class="md:col-span-1 font-cormorant text-3xl text-v2-mist">04</div>
+          <div class="md:col-span-3 font-cormorant text-2xl">Support Groups</div>
+          <div class="md:col-span-2 text-v2-mist text-sm tracking-wider">60 min · facilitated</div>
+          <div class="md:col-span-4 text-v2-paper/75 text-sm leading-relaxed">Small cohorts, shared wisdom, held space. Community as medicine.</div>
+          <div class="md:col-span-2 text-right font-cormorant text-3xl text-v2-paper">$10</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- philosophy / mosaic -->
+  <div id="v2-philosophy" class="py-32">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-5">
+        <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-4">Philosophy</div>
+        <h2 class="font-cormorant text-[clamp(2rem,4.4vw,3.6rem)] leading-[1.04] mb-8">A recovery rooted in <em class="italic text-v2-mist">place.</em></h2>
+        <p class="text-v2-paper/85 leading-[1.75] mb-5">The Pacific Northwest teaches a particular kind of patience. Tides return. Forests rebuild after fire. Rain becomes the river that carved the canyon you stand in.</p>
+        <p class="text-v2-paper/70 leading-[1.75]">That's the pace of this practice. Not crisis triage, not productivity coaching. Slow, layered, real change — held in a room with someone who has done it.</p>
+      </div>
+      <div class="md:col-span-7 grid grid-cols-2 gap-3">
+        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=900&q=80" class="w-full aspect-square object-cover vignette" alt="evergreens"/>
+        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=80" class="w-full aspect-square object-cover vignette" alt="foggy coast"/>
+        <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=900&q=80" class="w-full aspect-square object-cover vignette" alt="moss"/>
+        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80" class="w-full aspect-square object-cover vignette" alt="journaling"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div id="v2-book" class="relative py-32 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=2200&q=85" alt="dim forest" class="absolute inset-0 w-full h-full object-cover kb opacity-55" />
+    <div class="absolute inset-0 bg-gradient-to-b from-v2-black/70 to-v2-black"></div>
+    <div class="relative max-w-3xl mx-auto px-8 text-center">
+      <div class="text-v2-mist text-[10px] tracking-[0.5em] uppercase mb-6">Begin</div>
+      <h2 class="font-cormorant text-[clamp(2.4rem,5.5vw,4.6rem)] leading-[1] tracking-[-0.02em] mb-8">Resilience is a journey.<br/><em class="italic text-v2-mist">Let's start yours.</em></h2>
+      <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="inline-block ringbtn px-10 py-5 bg-v2-paper text-v2-black font-medium tracking-[0.22em] uppercase text-sm">Book the $20 discovery</a>
+      <p class="mt-7 text-v2-mist text-sm tracking-[0.18em] uppercase">30 minutes · video · no script</p>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="bg-v2-black border-t border-v2-paper/10 py-14">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-10 text-sm text-v2-paper/75">
+      <div><div class="font-cormorant text-2xl text-v2-paper mb-3">Kitts Recovery</div><p class="leading-relaxed">Peer support, individual & group counseling, mental health and substance use recovery. Pacific Northwest.</p></div>
+      <div><div class="text-[10px] tracking-[0.4em] uppercase text-v2-mist mb-3">Sessions</div><ul class="space-y-1.5"><li><a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v2-paper">Discovery $20</a></li><li><a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v2-paper">Standard $60</a></li><li><a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="hover:text-v2-paper">Flex Rate $45</a></li></ul></div>
+      <div><div class="text-[10px] tracking-[0.4em] uppercase text-v2-mist mb-3">Crisis</div><p class="leading-relaxed">In immediate crisis? Call or text <strong class="text-v2-paper">988</strong>. Kitts Recovery is non-emergency support.</p></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 mt-10 pt-6 border-t border-v2-paper/10 text-xs text-v2-mist flex flex-wrap justify-between gap-3">
+      <div>© 2026 Kitts Recovery Services</div><div>Demo · SkynetLabs</div>
+    </div>
+  </footer>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- V3 · MISTY MINIMAL                                            -->
+<!-- ============================================================ -->
+<section class="variant v3 font-inter text-v3-ink bg-v3-linen">
+
+  <!-- nav -->
+  <header class="sticky top-0 inset-x-0 z-30 backdrop-blur bg-v3-linen/80 border-b border-v3-ink/8">
+    <div class="max-w-6xl mx-auto px-8 py-5 flex items-center justify-between">
+      <a href="#" class="font-fraunces text-lg tracking-tight">kitts<span class="text-v3-stone">.</span>recovery</a>
+      <nav class="hidden md:flex items-center gap-8 text-[12px] tracking-[0.18em] uppercase text-v3-ink/70">
+        <a href="#v3-about">About</a>
+        <a href="#v3-services">Services</a>
+        <a href="#v3-faq">FAQ</a>
+        <a href="#v3-book" class="text-v3-slate">Book →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero — single line per fold -->
+  <div class="relative">
+    <div class="max-w-5xl mx-auto px-8 pt-32 pb-40">
+      <div class="text-v3-stone text-[11px] tracking-[0.4em] uppercase mb-12 fadeup">Kitts Recovery Services · est. Pacific NW</div>
+      <h1 class="font-fraunces text-[clamp(2.6rem,7.5vw,7rem)] leading-[1.02] tracking-[-0.025em] text-v3-slate fadeup" style="animation-delay:.1s">You don't have<br/>to carry<br/>the weight<br/><em class="italic text-v3-stone font-light">alone.</em></h1>
+      <div class="mt-16 flex flex-wrap items-center gap-8 fadeup" style="animation-delay:.3s">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn inline-flex items-center gap-3 text-v3-slate text-sm tracking-[0.18em] uppercase">
+          <span class="w-12 h-12 rounded-full bg-v3-slate text-v3-linen flex items-center justify-center">→</span>
+          Begin with a $20 discovery
+        </a>
+        <div class="text-v3-stone text-xs tracking-[0.18em] uppercase">30 min · zero pressure</div>
+      </div>
+    </div>
+    <!-- soft fog band -->
+    <div class="relative h-[60vh] overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=2200&q=80" alt="Foggy lake at dawn" class="absolute inset-0 w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-v3-linen via-transparent to-v3-linen"></div>
+      <div class="absolute inset-x-0 bottom-12 text-center font-cormorant italic text-[clamp(1.4rem,2.6vw,2.2rem)] text-v3-slate/90">Finding empathy in shared struggle is the first step toward healing.</div>
+    </div>
+  </div>
+
+  <!-- credential strip -->
+  <div class="border-y border-v3-ink/10 py-7 bg-v3-linen overflow-hidden">
+    <div class="flex marquee whitespace-nowrap gap-12 text-v3-stone font-fraunces text-2xl uppercase tracking-[0.18em]">
+      <span>EdD</span><span class="text-v3-slate/30">·</span><span>MPH</span><span class="text-v3-slate/30">·</span><span>CPRS</span><span class="text-v3-slate/30">·</span><span>Peer-led</span><span class="text-v3-slate/30">·</span><span>Pacific Northwest</span><span class="text-v3-slate/30">·</span>
+      <span>EdD</span><span class="text-v3-slate/30">·</span><span>MPH</span><span class="text-v3-slate/30">·</span><span>CPRS</span><span class="text-v3-slate/30">·</span><span>Peer-led</span><span class="text-v3-slate/30">·</span><span>Pacific Northwest</span><span class="text-v3-slate/30">·</span>
+    </div>
+  </div>
+
+  <!-- about — minimal columns -->
+  <div id="v3-about" class="py-28">
+    <div class="max-w-5xl mx-auto px-8 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-4 text-v3-stone text-[11px] tracking-[0.4em] uppercase">About<br/>Jessie</div>
+      <div class="md:col-span-8">
+        <h2 class="font-fraunces text-[clamp(1.9rem,4vw,3.2rem)] leading-[1.05] mb-8">"I've been<br/>where you are."</h2>
+        <p class="text-lg leading-[1.7] text-v3-slate mb-5">Majesta — Jessie — is the founder. She holds an EdD, an MPH, and a Certified Peer Recovery Specialist credential. She also walked her own recovery while keeping a demanding career intact. The session you book sits at the intersection of those two facts.</p>
+        <p class="text-v3-ink/70 leading-[1.7]">She functions, in any given hour, somewhere between formal clinician and lived peer — depending on what the work calls for.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- services -->
+  <div id="v3-services" class="py-24 border-t border-v3-ink/10">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="text-v3-stone text-[11px] tracking-[0.4em] uppercase mb-3">Services</div>
+      <h2 class="font-fraunces text-[clamp(1.9rem,4vw,3.2rem)] leading-[1.05] mb-14">Four ways to begin.</h2>
+      <div class="space-y-3">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid grid-cols-12 gap-4 py-6 border-t border-v3-ink/15 hover:border-v3-slate transition">
+          <div class="col-span-1 text-v3-stone text-sm pt-1">01</div>
+          <div class="col-span-5 font-fraunces text-2xl">Discovery</div>
+          <div class="col-span-3 text-v3-stone text-sm pt-1">30 min</div>
+          <div class="col-span-3 text-right font-fraunces text-2xl text-v3-slate">$20</div>
+          <div class="col-start-2 col-span-11 text-v3-ink/65 text-sm leading-relaxed mt-1">First call. We meet. Talk goals. No script.</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid grid-cols-12 gap-4 py-6 border-t border-v3-ink/15 hover:border-v3-slate transition">
+          <div class="col-span-1 text-v3-stone text-sm pt-1">02</div>
+          <div class="col-span-5 font-fraunces text-2xl">Standard</div>
+          <div class="col-span-3 text-v3-stone text-sm pt-1">60 min</div>
+          <div class="col-span-3 text-right font-fraunces text-2xl text-v3-slate">$60</div>
+          <div class="col-start-2 col-span-11 text-v3-ink/65 text-sm leading-relaxed mt-1">One-on-one. Recovery, mental health, transitions.</div>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="grid grid-cols-12 gap-4 py-6 border-t border-v3-ink/15 hover:border-v3-slate transition">
+          <div class="col-span-1 text-v3-stone text-sm pt-1">03</div>
+          <div class="col-span-5 font-fraunces text-2xl">Flex Rate</div>
+          <div class="col-span-3 text-v3-stone text-sm pt-1">60 min · on-call</div>
+          <div class="col-span-3 text-right font-fraunces text-2xl text-v3-slate">$45</div>
+          <div class="col-start-2 col-span-11 text-v3-ink/65 text-sm leading-relaxed mt-1">Same care, lower rate, community hours.</div>
+        </a>
+        <a href="#v3-book" class="grid grid-cols-12 gap-4 py-6 border-t border-b border-v3-ink/15 hover:border-v3-slate transition">
+          <div class="col-span-1 text-v3-stone text-sm pt-1">04</div>
+          <div class="col-span-5 font-fraunces text-2xl">Support Groups</div>
+          <div class="col-span-3 text-v3-stone text-sm pt-1">60 min · group</div>
+          <div class="col-span-3 text-right font-fraunces text-2xl text-v3-slate">$10</div>
+          <div class="col-start-2 col-span-11 text-v3-ink/65 text-sm leading-relaxed mt-1">Small cohort. Facilitated. Held space.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div id="v3-faq" class="py-24 bg-v3-linen border-t border-v3-ink/10">
+    <div class="max-w-3xl mx-auto px-8">
+      <div class="text-v3-stone text-[11px] tracking-[0.4em] uppercase mb-3">Common questions</div>
+      <h2 class="font-fraunces text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] mb-12">Before you book.</h2>
+      <div class="divide-y divide-v3-ink/15">
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-xl">Is this therapy or peer support? <span class="chev text-v3-stone">+</span></summary><p class="mt-3 text-v3-ink/70 leading-relaxed">Peer support, informed by clinical training. If you need a licensed therapist or psychiatrist, Jessie will say so directly and help with the next step.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-xl">Will my insurance cover this? <span class="chev text-v3-stone">+</span></summary><p class="mt-3 text-v3-ink/70 leading-relaxed">Most insurers do not cover peer support, which is why rates are kept low and a flex tier exists. Sessions are paid out-of-pocket through HeyPeers.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-xl">What if I'm in crisis right now? <span class="chev text-v3-stone">+</span></summary><p class="mt-3 text-v3-ink/70 leading-relaxed">Please call or text 988. This practice is non-emergency support and isn't structured for active crisis intervention.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-xl">How does the discovery session work? <span class="chev text-v3-stone">+</span></summary><p class="mt-3 text-v3-ink/70 leading-relaxed">30 minutes over secure video. No commitment to continue. The whole point is to see if Jessie is the right fit for what you're navigating.</p></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div id="v3-book" class="py-32 bg-v3-slate text-v3-linen">
+    <div class="max-w-3xl mx-auto px-8 text-center">
+      <h2 class="font-fraunces text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.05] mb-8">Resilience is a journey.<br/><em class="italic text-v3-fog font-light">Let's start yours.</em></h2>
+      <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn inline-block px-9 py-4 bg-v3-linen text-v3-slate font-medium tracking-[0.2em] uppercase text-sm rounded-full">Book a $20 discovery</a>
+      <p class="mt-6 text-v3-fog text-xs tracking-[0.2em] uppercase">Same-week openings</p>
+    </div>
+  </div>
+
+  <footer class="bg-v3-linen border-t border-v3-ink/10 py-10 text-sm text-v3-ink/60">
+    <div class="max-w-5xl mx-auto px-8 flex flex-wrap justify-between gap-4">
+      <div>© 2026 Kitts Recovery · Pacific NW</div>
+      <div class="flex gap-5"><a class="hover:text-v3-slate" href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener">Discovery</a><a class="hover:text-v3-slate" href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener">Standard</a><a class="hover:text-v3-slate" href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener">Flex</a></div>
+      <div>Crisis? <strong class="text-v3-slate">988</strong> · Demo by SkynetLabs</div>
+    </div>
+  </footer>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- V4 · MOSSBOUND MAGAZINE                                       -->
+<!-- ============================================================ -->
+<section class="variant v4 font-ebgar text-v4-mossd bg-v4-cream">
+
+  <!-- nav -->
+  <header class="border-b border-v4-mossd/15">
+    <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+      <a href="#" class="font-ebgar italic text-2xl">Kitts <em class="not-italic font-mono text-base text-v4-sage">/</em> Recovery</a>
+      <nav class="hidden md:flex items-center gap-7 text-[11px] tracking-[0.25em] uppercase text-v4-mossd/75 font-mono">
+        <a href="#v4-feature">Feature</a>
+        <a href="#v4-services">Sessions</a>
+        <a href="#v4-letters">Letters</a>
+        <a href="#v4-book">Book</a>
+      </nav>
+      <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="hidden md:inline-block px-4 py-2 bg-v4-mossd text-v4-cream text-[11px] tracking-[0.2em] uppercase font-mono">Discovery $20</a>
+    </div>
+  </header>
+
+  <!-- masthead -->
+  <div class="border-b border-v4-mossd/15 py-3 text-[10px] uppercase tracking-[0.4em] text-v4-mossd/65 font-mono">
+    <div class="max-w-7xl mx-auto px-8 flex flex-wrap justify-between gap-3">
+      <span>Vol. I · Issue No. 1</span><span>Pacific Northwest · 2026</span><span>Peer · Clinical · Lived</span>
+    </div>
+  </div>
+
+  <!-- editorial hero -->
+  <div id="v4-feature" class="py-16">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-7">
+        <div class="text-v4-sage text-[11px] tracking-[0.35em] uppercase font-mono mb-5">A Field Note · From the Founder</div>
+        <h1 class="font-ebgar italic text-[clamp(2.6rem,7vw,6.4rem)] leading-[0.96] tracking-[-0.02em]">You don't have to carry the weight <span class="not-italic font-fraunces text-v4-ochre">alone.</span></h1>
+        <div class="mt-10 flex items-center gap-6 text-v4-mossd/75">
+          <div class="w-14 h-14 rounded-full bg-v4-mossd flex items-center justify-center text-v4-cream font-fraunces text-xl">JK</div>
+          <div>
+            <div class="font-mono text-xs tracking-[0.2em] uppercase text-v4-mossd">By Majesta (Jessie) Kitts</div>
+            <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-v4-mossd/55">EdD · MPH · CPRS</div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-5">
+        <div class="aspect-[4/5] overflow-hidden vignette">
+          <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1400&q=80" alt="Forest floor moss" class="w-full h-full object-cover" />
+        </div>
+        <div class="mt-2 text-[10px] tracking-[0.3em] uppercase font-mono text-v4-mossd/55">Photograph · forest floor, fern season</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- magazine body -->
+  <div class="py-20 bg-v4-mossd text-v4-cream">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-7">
+        <p class="dropcap-4 text-[1.18rem] leading-[1.7] mb-6">Healing is not a tidy line. The recovery I lived didn't begin in a session. It began on a hard morning, in a quiet kitchen, with a phone in my hand and someone on the other end who had been there. Years later — after the EdD, the MPH, the peer-recovery training — I built a practice around that exact phone call.</p>
+        <p class="leading-[1.7] mb-5 text-v4-cream/85">Kitts Recovery Services is a peer-led practice for individuals navigating mental health and substance-use recovery. It is held over secure video. It costs less than most clinical hours, on purpose. It exists in the space between formal therapy and a friend who hasn't been there.</p>
+        <p class="leading-[1.7] text-v4-cream/85">If any of that resonates, the door starts at twenty dollars and thirty minutes. No script. No pressure. We meet, we talk, and we find out together if this is the right fit.</p>
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn mt-10 inline-flex items-center gap-3 px-7 py-3 border border-v4-ochre text-v4-ochre font-mono text-[11px] tracking-[0.3em] uppercase">Begin · Discovery $20 →</a>
+      </div>
+      <aside class="md:col-span-5 space-y-6">
+        <div class="border border-v4-cream/15 p-6">
+          <div class="text-v4-ochre font-mono text-[10px] tracking-[0.3em] uppercase mb-3">Pull Quote</div>
+          <p class="font-ebgar italic text-[1.4rem] leading-[1.3]">"Finding empathy in shared struggle is the first step toward healing."</p>
+        </div>
+        <div class="border border-v4-cream/15 p-6">
+          <div class="text-v4-ochre font-mono text-[10px] tracking-[0.3em] uppercase mb-3">Sidebar · Credentials</div>
+          <ul class="space-y-2 text-sm font-mono text-v4-cream/85">
+            <li>· EdD — Doctorate of Education</li>
+            <li>· MPH — Master of Public Health</li>
+            <li>· CPRS — Certified Peer Recovery Specialist</li>
+            <li>· Lived recovery experience</li>
+          </ul>
+        </div>
+        <div class="border border-v4-cream/15 p-6">
+          <div class="text-v4-ochre font-mono text-[10px] tracking-[0.3em] uppercase mb-3">If you are in crisis</div>
+          <p class="text-sm leading-relaxed text-v4-cream/85">Call or text <strong class="text-v4-ochre">988</strong>. This practice is for non-emergency, ongoing support — not active crisis intervention.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- services as catalog -->
+  <div id="v4-services" class="py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-end justify-between mb-12 border-b border-v4-mossd/20 pb-5">
+        <h2 class="font-ebgar italic text-[clamp(2rem,4vw,3.4rem)]">The Catalog</h2>
+        <div class="font-mono text-[10px] tracking-[0.3em] uppercase text-v4-mossd/55">No. 01–04 · Held over video</div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="group">
+          <div class="aspect-[5/3] overflow-hidden mb-4 bg-v4-sage/30"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&q=80" class="w-full h-full object-cover transition group-hover:scale-105" alt=""/></div>
+          <div class="flex items-baseline justify-between mb-2"><div class="font-ebgar italic text-2xl">No. 01 · Discovery</div><div class="font-fraunces text-2xl text-v4-ochre">$20</div></div>
+          <div class="font-mono text-[10px] tracking-[0.3em] uppercase text-v4-mossd/55 mb-2">30 min · video</div>
+          <p class="leading-relaxed text-v4-mossd/80">A first conversation. Talk goals. See if we're a fit. No commitment.</p>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener" class="group">
+          <div class="aspect-[5/3] overflow-hidden mb-4 bg-v4-sage/30"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80" class="w-full h-full object-cover transition group-hover:scale-105" alt=""/></div>
+          <div class="flex items-baseline justify-between mb-2"><div class="font-ebgar italic text-2xl">No. 02 · Standard</div><div class="font-fraunces text-2xl text-v4-ochre">$60</div></div>
+          <div class="font-mono text-[10px] tracking-[0.3em] uppercase text-v4-mossd/55 mb-2">60 min · video</div>
+          <p class="leading-relaxed text-v4-mossd/80">One-on-one. Recovery, mental health, transitions. The whole knot, untangled slowly.</p>
+        </a>
+        <a href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener" class="group">
+          <div class="aspect-[5/3] overflow-hidden mb-4 bg-v4-sage/30"><img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=1200&q=80" class="w-full h-full object-cover transition group-hover:scale-105" alt=""/></div>
+          <div class="flex items-baseline justify-between mb-2"><div class="font-ebgar italic text-2xl">No. 03 · Flex Rate</div><div class="font-fraunces text-2xl text-v4-ochre">$45</div></div>
+          <div class="font-mono text-[10px] tracking-[0.3em] uppercase text-v4-mossd/55 mb-2">60 min · community on-call hours</div>
+          <p class="leading-relaxed text-v4-mossd/80">Same care, lower rate. So cost isn't the reason you wait another month.</p>
+        </a>
+        <a href="#v4-book" class="group">
+          <div class="aspect-[5/3] overflow-hidden mb-4 bg-v4-sage/30"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80" class="w-full h-full object-cover transition group-hover:scale-105" alt=""/></div>
+          <div class="flex items-baseline justify-between mb-2"><div class="font-ebgar italic text-2xl">No. 04 · Support Groups</div><div class="font-fraunces text-2xl text-v4-ochre">$10</div></div>
+          <div class="font-mono text-[10px] tracking-[0.3em] uppercase text-v4-mossd/55 mb-2">60 min · facilitated cohort</div>
+          <p class="leading-relaxed text-v4-mossd/80">Small group. Shared wisdom. Held space. Community as medicine.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- letters -->
+  <div id="v4-letters" class="py-20 bg-v4-cream border-t border-v4-mossd/15">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="text-v4-sage font-mono text-[10px] tracking-[0.35em] uppercase mb-3">Letters from the Practice</div>
+      <h2 class="font-ebgar italic text-[clamp(1.8rem,3.6vw,2.8rem)] mb-12">Three things I want you to know.</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div><div class="font-fraunces text-4xl text-v4-ochre mb-3">i.</div><p class="leading-[1.7] text-v4-mossd/85">There is no story too heavy. The version you've been keeping quiet — that's the version that gets healed.</p></div>
+        <div><div class="font-fraunces text-4xl text-v4-ochre mb-3">ii.</div><p class="leading-[1.7] text-v4-mossd/85">You don't need to be in crisis to deserve support. Maintenance is the real work. Showing up before the wheels come off is how it stays good.</p></div>
+        <div><div class="font-fraunces text-4xl text-v4-ochre mb-3">iii.</div><p class="leading-[1.7] text-v4-mossd/85">You can change your mind. After thirty minutes you can say "this isn't it" and there will be no follow-up email. That's part of the deal.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div id="v4-book" class="relative py-28 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=2200&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" />
+    <div class="absolute inset-0 bg-v4-cream/85"></div>
+    <div class="relative max-w-3xl mx-auto px-8 text-center">
+      <div class="text-v4-sage font-mono text-[10px] tracking-[0.4em] uppercase mb-5">Begin</div>
+      <h2 class="font-ebgar italic text-[clamp(2.2rem,5vw,4rem)] leading-[1.04] mb-8">Resilience is a journey. <span class="not-italic font-fraunces text-v4-ochre">Let's start yours.</span></h2>
+      <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn inline-block px-9 py-4 bg-v4-mossd text-v4-cream font-mono text-[11px] tracking-[0.3em] uppercase">Book the $20 Discovery</a>
+    </div>
+  </div>
+
+  <footer class="bg-v4-mossd text-v4-cream/85 py-12 text-sm">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-4 gap-8">
+      <div class="md:col-span-2"><div class="font-ebgar italic text-2xl text-v4-cream mb-3">Kitts Recovery</div><p class="leading-relaxed">Peer support, individual & group counseling, mental health and substance use recovery. Pacific Northwest, US.</p></div>
+      <div><div class="text-v4-ochre font-mono text-[10px] tracking-[0.3em] uppercase mb-3">Sessions</div><ul class="space-y-1.5"><li><a class="hover:text-v4-cream" href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener">Discovery $20</a></li><li><a class="hover:text-v4-cream" href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener">Standard $60</a></li><li><a class="hover:text-v4-cream" href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener">Flex Rate $45</a></li></ul></div>
+      <div><div class="text-v4-ochre font-mono text-[10px] tracking-[0.3em] uppercase mb-3">Crisis</div><p class="leading-relaxed">Call/text <strong class="text-v4-ochre">988</strong>. This practice is non-emergency support.</p></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 mt-10 pt-5 border-t border-v4-cream/15 text-xs text-v4-cream/55 flex flex-wrap justify-between gap-3"><div>© 2026 Kitts Recovery Services</div><div>Demo · SkynetLabs</div></div>
+  </footer>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- V5 · NORTHERN TIDE BRUTALIST                                  -->
+<!-- ============================================================ -->
+<section class="variant v5 font-mono text-v5-salt bg-v5-navy grain-strong">
+
+  <!-- nav -->
+  <header class="border-b border-v5-salt/20">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-[12px] tracking-[0.3em] uppercase">[ KITTS / RECOVERY ]</a>
+      <nav class="hidden md:flex items-center gap-7 text-[11px] tracking-[0.25em] uppercase">
+        <a href="#v5-about" class="hover:text-v5-sand">/about</a>
+        <a href="#v5-services" class="hover:text-v5-sand">/sessions</a>
+        <a href="#v5-faq" class="hover:text-v5-sand">/faq</a>
+        <a href="#v5-book" class="text-v5-sand">/begin →</a>
+      </nav>
+      <div class="hidden md:block text-[10px] tracking-[0.3em] uppercase text-v5-sand">PNW · 2026</div>
+    </div>
+  </header>
+
+  <!-- ticker -->
+  <div class="border-b border-v5-salt/20 py-2.5 text-[10px] tracking-[0.35em] uppercase text-v5-sand/85 overflow-hidden">
+    <div class="flex marquee gap-10 whitespace-nowrap">
+      <span>· EdD</span><span>· MPH</span><span>· CPRS</span><span>· Peer-led</span><span>· Held over secure video</span><span>· Same-week openings</span><span>· Sliding rates</span><span>· Pacific Northwest</span>
+      <span>· EdD</span><span>· MPH</span><span>· CPRS</span><span>· Peer-led</span><span>· Held over secure video</span><span>· Same-week openings</span><span>· Sliding rates</span><span>· Pacific Northwest</span>
+    </div>
+  </div>
+
+  <!-- hero brutalist slab -->
+  <div class="border-b border-v5-salt/20">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-8">
+        <div class="text-v5-sand text-[10px] tracking-[0.45em] uppercase mb-8">[ A peer-led recovery practice ]</div>
+        <h1 class="font-fraunces text-[clamp(3rem,11vw,11rem)] leading-[0.88] tracking-[-0.04em]">YOU<br/>DON'T<br/>CARRY IT<br/><em class="italic text-v5-kelp font-light">alone.</em></h1>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn inline-block px-7 py-4 bg-v5-sand text-v5-navy text-[11px] tracking-[0.28em] uppercase font-medium">/begin · $20 · 30 min</a>
+          <a href="#v5-services" class="inline-block px-7 py-4 border border-v5-salt/30 text-v5-salt text-[11px] tracking-[0.28em] uppercase">/all sessions</a>
+        </div>
+      </div>
+      <div class="md:col-span-4 flex flex-col justify-end">
+        <div class="border-t border-v5-salt/30 pt-5 text-sm text-v5-salt/85 leading-relaxed">Professional support, rooted in real-life experience. The bridge between clinical expertise and genuine understanding.</div>
+        <div class="hair my-6"></div>
+        <div class="text-[10px] tracking-[0.4em] uppercase text-v5-sand/85">— M. (Jessie) Kitts<br/>EdD · MPH · CPRS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- coordinate / image strip -->
+  <div class="grid md:grid-cols-3 border-b border-v5-salt/20">
+    <div class="aspect-video md:aspect-auto md:h-72 overflow-hidden border-r border-v5-salt/20"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80" class="w-full h-full object-cover" alt=""/></div>
+    <div class="aspect-video md:aspect-auto md:h-72 overflow-hidden border-r border-v5-salt/20"><img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=900&q=80" class="w-full h-full object-cover" alt=""/></div>
+    <div class="aspect-video md:aspect-auto md:h-72 overflow-hidden"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=80" class="w-full h-full object-cover" alt=""/></div>
+  </div>
+
+  <!-- about block -->
+  <div id="v5-about" class="border-b border-v5-salt/20">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-4 text-[10px] tracking-[0.45em] uppercase text-v5-sand">[ §02 / about ]</div>
+      <div class="md:col-span-8">
+        <h2 class="font-fraunces text-[clamp(2rem,5vw,4rem)] leading-[0.95] tracking-[-0.025em] mb-8">"I've been<br/>where you are."</h2>
+        <p class="text-v5-salt/85 leading-[1.75] mb-5">Majesta — Jessie — Kitts. Founder. Three credentials assembled in the order that matters: she lived the recovery first, then went and got the doctorate.</p>
+        <p class="text-v5-salt/70 leading-[1.75] mb-10">A session here lives between formal clinical guidance and lived peer support. Which one shows up depends on what the hour calls for.</p>
+        <div class="grid grid-cols-3 gap-5 max-w-xl">
+          <div class="border border-v5-salt/25 p-5"><div class="font-fraunces text-3xl text-v5-sand">EdD</div><div class="text-[10px] tracking-[0.3em] uppercase text-v5-salt/55 mt-2">Doctorate</div></div>
+          <div class="border border-v5-salt/25 p-5"><div class="font-fraunces text-3xl text-v5-sand">MPH</div><div class="text-[10px] tracking-[0.3em] uppercase text-v5-salt/55 mt-2">Public Health</div></div>
+          <div class="border border-v5-salt/25 p-5"><div class="font-fraunces text-3xl text-v5-sand">CPRS</div><div class="text-[10px] tracking-[0.3em] uppercase text-v5-salt/55 mt-2">Peer Recovery</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- services brutalist table -->
+  <div id="v5-services" class="border-b border-v5-salt/20">
+    <div class="max-w-7xl mx-auto px-6 py-20">
+      <div class="grid md:grid-cols-12 gap-10 mb-12">
+        <div class="md:col-span-4 text-[10px] tracking-[0.45em] uppercase text-v5-sand">[ §03 / sessions ]</div>
+        <div class="md:col-span-8"><h2 class="font-fraunces text-[clamp(2rem,5vw,4rem)] leading-[0.95] tracking-[-0.025em]">Four. Doors.</h2></div>
+      </div>
+      <table class="w-full text-left">
+        <thead class="text-[10px] tracking-[0.35em] uppercase text-v5-sand/85 border-b border-v5-salt/25">
+          <tr><th class="py-3 pr-4 w-12">No.</th><th class="py-3 pr-4">Session</th><th class="py-3 pr-4 hidden md:table-cell">Length</th><th class="py-3 pr-4 hidden md:table-cell">Format</th><th class="py-3 text-right">Rate</th></tr>
+        </thead>
+        <tbody class="font-fraunces text-xl">
+          <tr class="border-b border-v5-salt/15 hover:bg-v5-teal/20 transition cursor-pointer" onclick="window.open('https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366','_blank','noopener')">
+            <td class="py-6 pr-4 text-v5-sand">01</td>
+            <td class="py-6 pr-4">Discovery <span class="block text-sm font-mono text-v5-salt/60 mt-1">A first conversation. No script.</span></td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">30 min</td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">Video · 1:1</td>
+            <td class="py-6 text-right text-v5-kelp">$20</td>
+          </tr>
+          <tr class="border-b border-v5-salt/15 hover:bg-v5-teal/20 transition cursor-pointer" onclick="window.open('https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366','_blank','noopener')">
+            <td class="py-6 pr-4 text-v5-sand">02</td>
+            <td class="py-6 pr-4">Standard <span class="block text-sm font-mono text-v5-salt/60 mt-1">Tailored support. Recovery, mental health, transitions.</span></td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">60 min</td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">Video · 1:1</td>
+            <td class="py-6 text-right text-v5-kelp">$60</td>
+          </tr>
+          <tr class="border-b border-v5-salt/15 hover:bg-v5-teal/20 transition cursor-pointer" onclick="window.open('https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366','_blank','noopener')">
+            <td class="py-6 pr-4 text-v5-sand">03</td>
+            <td class="py-6 pr-4">Flex Rate <span class="block text-sm font-mono text-v5-salt/60 mt-1">Same care, lower rate, community on-call hours.</span></td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">60 min</td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">Video · 1:1</td>
+            <td class="py-6 text-right text-v5-kelp">$45</td>
+          </tr>
+          <tr class="hover:bg-v5-teal/20 transition cursor-pointer" onclick="document.getElementById('v5-book').scrollIntoView({behavior:'smooth'})">
+            <td class="py-6 pr-4 text-v5-sand">04</td>
+            <td class="py-6 pr-4">Support Groups <span class="block text-sm font-mono text-v5-salt/60 mt-1">Small cohort, facilitated, held space.</span></td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">60 min</td>
+            <td class="py-6 pr-4 hidden md:table-cell font-mono text-sm text-v5-salt/70">Group · video</td>
+            <td class="py-6 text-right text-v5-kelp">$10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div id="v5-faq" class="border-b border-v5-salt/20">
+    <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-4 text-[10px] tracking-[0.45em] uppercase text-v5-sand">[ §04 / faq ]</div>
+      <div class="md:col-span-8 divide-y divide-v5-salt/20">
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-2xl">Therapy or peer support? <span class="chev text-v5-sand">+</span></summary><p class="mt-3 text-v5-salt/75 leading-relaxed">Peer support, informed by clinical training. If a licensed therapist or psychiatrist is what you need, Jessie will name it directly and help you with the next step.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-2xl">Insurance? <span class="chev text-v5-sand">+</span></summary><p class="mt-3 text-v5-salt/75 leading-relaxed">Most insurers don't cover peer support. That's why rates are kept low and a flex tier exists. Sessions paid out-of-pocket through HeyPeers.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-2xl">In crisis right now? <span class="chev text-v5-sand">+</span></summary><p class="mt-3 text-v5-salt/75 leading-relaxed">Call/text <strong class="text-v5-sand">988</strong>. This practice is non-emergency support.</p></details>
+        <details class="py-5"><summary class="flex justify-between font-fraunces text-2xl">After the discovery, then what? <span class="chev text-v5-sand">+</span></summary><p class="mt-3 text-v5-salt/75 leading-relaxed">If we're a fit, you book a Standard or Flex session. If we're not, Jessie says so and points you toward who is. No follow-up email pressure.</p></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div id="v5-book" class="relative overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=2200&q=85" alt="" class="absolute inset-0 w-full h-full object-cover opacity-30" />
+    <div class="absolute inset-0 bg-gradient-to-b from-v5-navy/85 to-v5-teal/95"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-7">
+        <div class="text-[10px] tracking-[0.45em] uppercase text-v5-sand mb-6">[ §05 / begin ]</div>
+        <h2 class="font-fraunces text-[clamp(2.4rem,7vw,6rem)] leading-[0.95] tracking-[-0.03em]">Resilience<br/>is a journey.<br/><em class="italic text-v5-sand font-light">Start yours.</em></h2>
+      </div>
+      <div class="md:col-span-5 flex flex-col justify-end">
+        <a href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener" class="ringbtn block bg-v5-sand text-v5-navy p-8 mb-3 hover:bg-v5-salt transition">
+          <div class="text-[10px] tracking-[0.4em] uppercase mb-2">Discovery · 30 min</div>
+          <div class="font-fraunces text-5xl">$20 →</div>
+        </a>
+        <p class="text-v5-salt/70 text-sm font-mono">No script. No commitment. Same-week openings.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-v5-navy border-t border-v5-salt/20 py-10 text-[11px] tracking-[0.18em] uppercase">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-v5-salt/70">
+      <div><span class="text-v5-sand">[ Kitts Recovery Services ]</span><br/><span class="text-v5-salt/55 normal-case tracking-normal text-xs leading-relaxed mt-2 inline-block">Peer support · individual & group counseling · mental health & substance use recovery · Pacific Northwest</span></div>
+      <div><div class="text-v5-sand mb-2">/sessions</div><div class="space-x-3 normal-case tracking-normal"><a class="hover:text-v5-sand" href="https://heypeers.com/meeting_utilities/374?peer_supporter_id=215366" target="_blank" rel="noopener">Discovery $20</a> · <a class="hover:text-v5-sand" href="https://heypeers.com/meeting_utilities/375?peer_supporter_id=215366" target="_blank" rel="noopener">Standard $60</a> · <a class="hover:text-v5-sand" href="https://heypeers.com/meeting_utilities/376?peer_supporter_id=215366" target="_blank" rel="noopener">Flex $45</a></div></div>
+      <div><div class="text-v5-sand mb-2">/crisis</div><div class="normal-case tracking-normal text-xs">Call/text <strong class="text-v5-sand">988</strong>. Non-emergency support.</div></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-8 pt-5 border-t border-v5-salt/15 text-[10px] tracking-[0.3em] uppercase text-v5-salt/55 flex flex-wrap justify-between gap-3"><div>© 2026 · kittsrecoveryservices.com</div><div>Demo · SkynetLabs</div></div>
+  </footer>
+</section>
+
+
+<!-- ===== switcher script ===== -->
+<script>
+(function(){
+  const btns = document.querySelectorAll('.switcher button');
+  const body = document.body;
+  function show(v){
+    body.className = 'show-' + v + ' grain antialiased';
+    btns.forEach(b => b.classList.toggle('active', b.dataset.variant === v));
+    history.replaceState(null,'','#'+v);
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  btns.forEach(b => b.addEventListener('click', () => show(b.dataset.variant)));
+  const hash = (location.hash||'').replace('#','');
+  if(['v1','v2','v3','v4','v5'].includes(hash)) show(hash);
+})();
+</script>
+</body>
+</html>
