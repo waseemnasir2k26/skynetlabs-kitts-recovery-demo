@@ -2,6 +2,10 @@
 
 5-variant speculative landing page build for **Kitts Recovery Services** (PNW peer support & recovery practice). Built by **SkynetLabs** for client pitch.
 
+## Status
+
+Last reviewed: September 2026 · release v2026.09
+
 ## Live
 
 - Live: https://skynetlabs-kitts-recovery-demo.vercel.app/
